@@ -15,7 +15,7 @@ EMAIL_PASSWORD = "iigk svlo fehn clls"  # Use App Password, NOT your Gmail passw
 app = Flask(__name__)
 
 latest_email_id = None  # Stores the latest fetched email ID
-latest_emails = []  # Stores new emails
+latest_email_data = {}  # Stores the latest email data with phishing analysis
 
 def extract_email_headers(msg):
     """Extract headers required for email spoofing and phishing detection."""
@@ -60,7 +60,7 @@ def extract_email_body_and_attachments(msg):
 
 def fetch_new_email():
     """Fetch only the latest new email that has just entered the inbox."""
-    global latest_email_id, latest_emails
+    global latest_email_id, latest_email_data
     try:
         mail = imaplib.IMAP4_SSL(IMAP_SERVER, IMAP_PORT)
         mail.login(EMAIL_ACCOUNT, EMAIL_PASSWORD)
@@ -87,15 +87,24 @@ def fetch_new_email():
                 email_headers = extract_email_headers(msg)
                 email_body = extract_email_body_and_attachments(msg)["text"]
                 
-                latest_emails = [{"headers": email_headers, "body": email_body}]
-                latest_email_id = latest_fetched_id
-                
                 print("📩 New Email Fetched!", email_headers["Subject"])
                 
                 # Send the extracted email data to the phishing detector function
-                run_phishing_detector(email_headers, email_body)
-
+                report, verdict, confidence, enhanced_report = run_phishing_detector(email_headers, email_body)
+                
+                latest_email_data = {
+                    "headers": email_headers,
+                    "body": email_body,
+                    "report": report,
+                    "verdict": verdict,
+                    "confidence": confidence,
+                    "enhanced_report": enhanced_report,
+                }
+                
+                latest_email_id = latest_fetched_id
+        
         mail.logout()
+        
     except Exception as e:
         print("❌ Error fetching email:", str(e))
 
@@ -114,8 +123,8 @@ def index():
 
 @app.route("/latest-email", methods=["GET"])
 def get_latest_email():
-    """API endpoint to get the latest email with headers & full body."""
-    return jsonify(latest_emails)
+    """API endpoint to get the latest email with phishing detection results."""
+    return jsonify(latest_email_data)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
