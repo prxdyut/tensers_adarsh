@@ -305,16 +305,14 @@ app.post("/api/auth/sign-up", async (req, res) => {
 });
 
 app.get("/dashboard", (req, res) => {
-  // Pass all incidents to the dashboard for statistics calculation
+  
   res.render("dashboard", { incidents });
 });
 
-// Incidents route
 app.get("/incidents", (req, res) => {
   res.render("incidents", { incidents });
 });
 
-// Report route with incident ID parameter
 app.get("/report/:id?", async (req, res) => {
   try {
     const incidentId = req.params.id;
@@ -413,11 +411,52 @@ app.get("/report/:id?", async (req, res) => {
 });
 
 app.get("/chatbot", (req, res) => {
-  res.render("chatbot");
+  res.render("chatbot", { messages: [] });
 });
 
-app.get("/blogs", (req, res) => {
-  res.render("blogs");
+app.post("/api/chat", async (req, res) => {
+  try {
+    const { message } = req.body;
+    
+    if (!message) {
+      return res.status(400).json({ error: "Message is required" });
+    }
+    
+    const response = await fetch("https://ad7d-14-139-125-227.ngrok-free.app/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message }),
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error('Error in chat API:', error);
+    res.status(500).json({ error: "Failed to get response from chat API" });
+  }
+});
+
+app.get("/blogs", async (req, res) => {
+  try {
+    const response = await fetch("https://ad7d-14-139-125-227.ngrok-free.app/news");
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const blogs = await response.json();
+    res.render("blogs", { blogs });
+  } catch (error) {
+    console.error('Error fetching blogs:', error);
+    // Provide empty array as fallback if API call fails
+    res.render("blogs", { blogs: [] });
+  }
 });
 
 app.get("/scan", (req, res) => {

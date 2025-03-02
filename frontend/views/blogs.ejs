@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <%- include('partials/meta') %>
-    <title>Tensers - Dashboard</title>
+    <title>Tensers - Blogs</title>
     <%- include('partials/links') %>
   </head>
   <body>
@@ -14,7 +14,7 @@
           class="body-wrapper flex-1 overflow-x-hidden dark:bg-darkblack-500"
         >
           <%- include('partials/components/topbar', {title: "Blogs",
-          description: 'View your blogs'}) %>
+          description: 'Latest cybersecurity news and updates'}) %>
 
           <main
             class="h-screen w-full px-6 pb-6 pt-[100px] sm:pt-[156px] xl:px-[48px] xl:pb-[48px]"
@@ -23,68 +23,47 @@
             <div
               class="grid gap-3 lg:gap-4 xl:grid-cols-1 xl:gap-6 2xl:grid-cols-2"
             >
-            <!-- Single Integration Connect-->
-            <div
-              class="relative rounded-lg bg-white p-6 dark:bg-darkblack-600"
-            >
-              <div class="flex space-x-5">
-                <div>
-                  <h3
-                    class="text-xl font-bold text-bgray-900 dark:text-white"
-                  >
-                    YouTube
-                  </h3>
+            <% if (blogs && blogs.length > 0) { %>
+              <% blogs.forEach(blog => { %>
+                <!-- Single Blog Item -->
+                <div
+                  class="relative rounded-lg bg-white p-6 dark:bg-darkblack-600"
+                >
+                  <div class="flex space-x-5">
+                    <div>
+                      <h3
+                        class="text-xl font-bold text-bgray-900 dark:text-white"
+                      >
+                        <%= blog.title %>
+                      </h3>
+                    </div>
+                  </div>
+                  <p class="mb-4 pt-5 text-sm text-bgray-600 dark:text-bgray-50">
+                    <%= blog.summary %>
+                  </p>
+                  <div class="w-full flex justify-between">
+                    <span class="text-sm text-bgray-600 dark:text-bgray-50"
+                      >Sentiment: <span class="<%= blog.sentiment === 'positive' ? 'text-success-300' : blog.sentiment === 'negative' ? 'text-danger-300' : 'text-warning-300' %>"><%= blog.sentiment.charAt(0).toUpperCase() + blog.sentiment.slice(1) %></span></span
+                    >
+                    <span class="text-sm text-bgray-600 dark:text-bgray-50"
+                      >Confidence: <%= parseFloat(blog.confidence) * 100 %>%</span
+                    >
+                  </div>
+                  <a href="<%= blog.link %>" target="_blank">
+                    <button
+                      class="h-12 w-full mt-6 rounded-md border border-success-300 text-base font-medium text-success-300 transition duration-300 ease-in-out hover:bg-success-300 hover:text-white"
+                    >
+                      Visit Article
+                    </button>
+                  </a>
                 </div>
+              <% }); %>
+            <% } else { %>
+              <div class="col-span-full text-center py-10">
+                <h3 class="text-xl font-bold text-bgray-900 dark:text-white">No blogs available at the moment</h3>
+                <p class="mt-2 text-sm text-bgray-600 dark:text-bgray-50">Please check back later for updates</p>
               </div>
-              <p class="mb-4 pt-5 text-sm text-bgray-600 dark:text-bgray-50">
-                At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                blanditiis praesentium voluptatum.
-              </p>
-              <div class="w-full flex justify-between">
-                <span class="text-sm text-bgray-600 dark:text-bgray-50"
-                  >Sentiment: Positive</span
-                >
-                <span class="text-sm text-bgray-600 dark:text-bgray-50"
-                  >Probability: 0.95</span
-                >
-              </div>
-              <button
-                class="h-12 w-full mt-6 rounded-md border border-success-300 text-base font-medium text-success-300 transition duration-300 ease-in-out hover:bg-success-300 hover:text-white"
-              >
-                Visit
-              </button>
-            </div>
-            <!-- Single Integration Connect-->
-            <div
-              class="relative rounded-lg bg-white p-6 dark:bg-darkblack-600"
-            >
-              <div class="flex space-x-5">
-                <div>
-                  <h3
-                    class="text-xl font-bold text-bgray-900 dark:text-white"
-                  >
-                    YouTube
-                  </h3>
-                </div>
-              </div>
-              <p class="mb-4 pt-5 text-sm text-bgray-600 dark:text-bgray-50">
-                At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                blanditiis praesentium voluptatum.
-              </p>
-              <div class="w-full flex justify-between">
-                <span class="text-sm text-bgray-600 dark:text-bgray-50"
-                  >Sentiment: Positive</span
-                >
-                <span class="text-sm text-bgray-600 dark:text-bgray-50"
-                  >Probability: 0.95</span
-                >
-              </div>
-              <button
-                class="h-12 w-full mt-6 rounded-md border border-success-300 text-base font-medium text-success-300 transition duration-300 ease-in-out hover:bg-success-300 hover:text-white"
-              >
-                Visit
-              </button>
-            </div>
+            <% } %>
             </div>
             <!-- write your code here-->
           </main>

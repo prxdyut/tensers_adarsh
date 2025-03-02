@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <%- include('partials/meta') %>
-    <title>Tensers - Dashboard</title>
+    <title>Tensers - Chatbot</title>
     <%- include('partials/links') %>
   </head>
   <body>
@@ -15,7 +15,7 @@
         >
           <%- include('partials/components/topbar', {title:"Chatbot", description:"Chat with the Tensers AI"}) %>
           <main
-          class="flex h-screen flex-col justify-between rounded-lg bg-white dark:border  dark:bg-darkblack-500 w-full m-4"
+          class="flex h-screen flex-col justify-between rounded-lg bg-white dark:border dark:bg-darkblack-500 w-full m-4"
         >
           <div
             class="flex justify-between border-b border-bgray-300 px-[26px] py-6 dark:border-darkblack-400"
@@ -23,7 +23,7 @@
             <h1
               class="text-2xl font-semibold text-bgray-900 dark:text-white"
             >
-              Team Chat
+              Tensers AI Assistant
             </h1>
             <div class="flex items-center space-x-3">
               <div>
@@ -32,29 +32,11 @@
                   alt="members"
                 />
               </div>
-              <button
-                type="button"
-                class="flex h-[36px] w-[36px] items-center justify-center rounded-full bg-bgray-200"
-              >
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 14 14"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M7.75 1C7.75 0.585786 7.41421 0.25 7 0.25C6.58579 0.25 6.25 0.585786 6.25 1V6.25H1C0.585786 6.25 0.25 6.58579 0.25 7C0.25 7.41421 0.585786 7.75 1 7.75H6.25V13C6.25 13.4142 6.58579 13.75 7 13.75C7.41421 13.75 7.75 13.4142 7.75 13V7.75H13C13.4142 7.75 13.75 7.41421 13.75 7C13.75 6.58579 13.4142 6.25 13 6.25H7.75V1Z"
-                    fill="#718096"
-                  />
-                </svg>
-              </button>
             </div>
           </div>
-          <div class="w-full px-5 py-6 lg:px-[35px] lg:py-[38px] m-4">
-            <div class="mb-5 flex flex-col space-y-[32px] dark:bg-darkblack-600 p-4 rounded-lg">
+          <div class="w-full px-5 py-6 lg:px-[35px] lg:py-[38px] m-4 flex-grow overflow-y-auto" id="chat-messages">
+            <div class="flex flex-col space-y-[32px] dark:bg-darkblack-600 p-4 rounded-lg">
+              <!-- Welcome message -->
               <div class="flex justify-start">
                 <div class="flex items-end space-x-3">
                   <div class="flex items-center space-x-2">
@@ -63,7 +45,7 @@
                     >
                       <img
                         src="./assets/images/avatar/user-1.png"
-                        alt="avater"
+                        alt="avatar"
                         class="h-full w-full object-cover"
                       />
                     </div>
@@ -73,103 +55,23 @@
                       <p
                         class="text-sm font-medium text-bgray-900 dark:text-white"
                       >
-                        Hi, What can I help you with?
+                        Hi, I'm the Tensers AI Assistant. How can I help you with cybersecurity today?
                       </p>
                     </div>
                   </div>
-                  <span class="text-xs font-medium text-bgray-500"
-                    >10:00 PM</span
-                  >
+                  <span class="text-xs font-medium text-bgray-500" id="time-stamp">
+                    <%= new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) %>
+                  </span>
                 </div>
               </div>
-              <div class="flex justify-start">
-                <div class="flex items-end space-x-3">
-                  <div class="flex items-center space-x-2">
-                    <div
-                      class="h-[35px] w-[36px] overflow-hidden rounded-full"
-                    >
-                      <img
-                        src="./assets/images/avatar/user-1.png"
-                        alt="avater"
-                        class="h-full w-full object-cover"
-                      />
-                    </div>
-                    <div>
-                      <img
-                        src="./assets/images/others/mp3.png"
-                        class="block dark:hidden"
-                        alt="mp3"
-                      />
-                      <img
-                        src="./assets/images/others/mp3-dark.png"
-                        class="hidden dark:block"
-                        alt="mp3"
-                      />
-                    </div>
-                  </div>
-                  <span class="text-xs font-medium text-bgray-500"
-                    >10:00 PM</span
-                  >
-                </div>
-              </div>
-              <div class="flex justify-end">
-                <div class="flex items-end space-x-3">
-                  <span class="text-xs font-medium text-bgray-500"
-                    >10:00 PM</span
-                  >
-                  <div class="flex items-center space-x-2">
-                    <div
-                      class="rounded-b-lg rounded-l-lg bg-bgray-100 p-3 dark:bg-darkblack-500"
-                    >
-                      <p
-                        class="text-sm font-medium text-bgray-900 dark:text-white"
-                      >
-                        Hi, What can I help you with?
-                      </p>
-                    </div>
-                    <div
-                      class="h-[35px] w-[36px] overflow-hidden rounded-full"
-                    >
-                      <img
-                        src="./assets/images/avatar/user-1.png"
-                        alt="avater"
-                        class="h-full w-full object-cover"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="flex justify-start">
-                <div class="flex items-end space-x-3">
-                  <div class="flex items-center space-x-2">
-                    <div
-                      class="h-[35px] w-[36px] overflow-hidden rounded-full"
-                    >
-                      <img
-                        src="./assets/images/avatar/user-1.png"
-                        alt="avater"
-                        class="h-full w-full object-cover"
-                      />
-                    </div>
-                    <div
-                      class="rounded-lg bg-bgray-100 p-3 dark:bg-darkblack-500"
-                    >
-                      <p
-                        class="text-sm font-medium text-bgray-900 dark:text-white"
-                      >
-                        Hi, What can I help you with?
-                      </p>
-                    </div>
-                  </div>
-                  <span class="text-xs font-medium text-bgray-500"
-                    >10:00 PM</span
-                  >
-                </div>
-              </div>
+              <!-- Messages will be appended here -->
+              <div id="message-container"></div>
             </div>
-            <div class="flex h-[58px] w-full items-center justify-center space-x-4 ">
+          </div>
+          <div class="w-full px-5 py-6 lg:px-[35px]">
+            <form id="chat-form" class="flex h-[58px] w-full items-center justify-center space-x-4">
               <div
-                class="flex h-full w-full items-center justify-between rounded-lg border border-transparent bg-bgray-100 px-5 focus-within:border-success-300 dark:border-darkblack-600 dark:bg-darkblack-600 lg:w-[318px]"
+                class="flex h-full w-full items-center justify-between rounded-lg border border-transparent bg-bgray-100 px-5 focus-within:border-success-300 dark:border-darkblack-600 dark:bg-darkblack-600"
               >
                 <span>
                   <svg
@@ -191,7 +93,8 @@
                 <label class="w-full">
                   <input
                     type="text"
-                    placeholder="Type your Message..."
+                    id="message-input"
+                    placeholder="Type your message..."
                     class="w-full border-none bg-bgray-100 p-0 pl-[15px] font-medium placeholder:text-sm placeholder:font-medium placeholder:text-bgray-400 focus:outline-none focus:ring-0 dark:bg-darkblack-600 dark:text-white"
                   />
                 </label>
@@ -213,7 +116,7 @@
                   </svg>
                 </span>
               </div>
-              <button type="button">
+              <button type="submit" id="send-button">
                 <svg
                   width="20"
                   height="18"
@@ -227,9 +130,9 @@
                   />
                 </svg>
               </button>
-            </div>
+            </form>
           </div>
-        </div>
+        </main>
         </div>
       </div>
     </div>
@@ -237,6 +140,137 @@
     <!-- layout end -->
     <%- include('partials/scripts') %>
     <script>
+      // Chat functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        const chatForm = document.getElementById('chat-form');
+        const messageInput = document.getElementById('message-input');
+        const messageContainer = document.getElementById('message-container');
+        const chatMessages = document.getElementById('chat-messages');
+        
+        // Function to add a message to the chat
+        function addMessage(content, isUser = false) {
+          const currentTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+          
+          const messageHTML = `
+            <div class="flex justify-${isUser ? 'end' : 'start'}">
+              <div class="flex items-end space-x-3">
+                ${isUser ? `<span class="text-xs font-medium text-bgray-500">${currentTime}</span>` : ''}
+                <div class="flex items-center space-x-2">
+                  ${isUser ? 
+                    `<div class="rounded-b-lg rounded-l-lg bg-success-300 p-3">
+                      <p class="text-sm font-medium text-white">
+                        ${content}
+                      </p>
+                    </div>
+                    <div class="h-[35px] w-[36px] overflow-hidden rounded-full">
+                      <img src="./assets/images/avatar/user-2.png" alt="user" class="h-full w-full object-cover" />
+                    </div>` 
+                    : 
+                    `<div class="h-[35px] w-[36px] overflow-hidden rounded-full">
+                      <img src="./assets/images/avatar/user-1.png" alt="assistant" class="h-full w-full object-cover" />
+                    </div>
+                    <div class="rounded-lg bg-bgray-100 p-3 dark:bg-darkblack-500">
+                      <p class="text-sm font-medium text-bgray-900 dark:text-white">
+                        ${content}
+                      </p>
+                    </div>`
+                  }
+                </div>
+                ${!isUser ? `<span class="text-xs font-medium text-bgray-500">${currentTime}</span>` : ''}
+              </div>
+            </div>
+          `;
+          
+          messageContainer.insertAdjacentHTML('beforeend', messageHTML);
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // Handle form submission
+        chatForm.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          
+          const message = messageInput.value.trim();
+          if (!message) return;
+          
+          // Add user message to chat
+          addMessage(message, true);
+          
+          // Clear input
+          messageInput.value = '';
+          
+          try {
+            // Show loading indicator
+            const loadingId = 'loading-' + Date.now();
+            messageContainer.insertAdjacentHTML('beforeend', `
+              <div id="${loadingId}" class="flex justify-start">
+                <div class="flex items-end space-x-3">
+                  <div class="flex items-center space-x-2">
+                    <div class="h-[35px] w-[36px] overflow-hidden rounded-full">
+                      <img src="./assets/images/avatar/user-1.png" alt="assistant" class="h-full w-full object-cover" />
+                    </div>
+                    <div class="rounded-lg bg-bgray-100 p-3 dark:bg-darkblack-500">
+                      <p class="text-sm font-medium text-bgray-900 dark:text-white">
+                        <span class="typing-animation">Thinking</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Send message to API
+            const response = await fetch('/api/chat', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ message }),
+            });
+            
+            // Remove loading indicator
+            document.getElementById(loadingId).remove();
+            
+            if (!response.ok) {
+              throw new Error('Failed to get response');
+            }
+            
+            const data = await response.json();
+            
+            // Add bot response to chat
+            addMessage(data.response || 'Sorry, I couldn\'t process your request.');
+            
+          } catch (error) {
+            console.error('Error:', error);
+            // Remove loading indicator if it exists
+            const loadingElement = document.getElementById(loadingId);
+            if (loadingElement) loadingElement.remove();
+            
+            // Add error message
+            addMessage('Sorry, there was an error processing your request. Please try again later.');
+          }
+        });
+      });
+      
+      // Add CSS for typing animation
+      const style = document.createElement('style');
+      style.textContent = `
+        .typing-animation::after {
+          content: "...";
+          animation: typing 1.5s infinite;
+          display: inline-block;
+          width: 1em;
+          text-align: left;
+        }
+        
+        @keyframes typing {
+          0% { content: "."; }
+          33% { content: ".."; }
+          66% { content: "..."; }
+        }
+      `;
+      document.head.appendChild(style);
+      
       $(".card-slider").slick({
         dots: true,
         infinite: true,

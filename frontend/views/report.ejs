@@ -18,20 +18,20 @@
           <main class="h-screen w-full px-6 pt-[100px] sm:pt-[156px] xl:px-12">
             <!-- Main verdict section -->
             <div class="mb-6 grid grid-cols-2 gap-4">
-              <div class="flex items-center rounded-lg p-6 shadow-lg dark:bg-darkblack-600" id="verdictCard">
+              <div class="flex items-center rounded-lg p-6 space-x-4 shadow-lg dark:bg-darkblack-600" id="verdictCard">
                 <div class="mr-4 flex h-16 w-16 items-center justify-center rounded-full <%= analysisData.isPhishing ? 'bg-red-100 dark:bg-red-900' : 'bg-green-100 dark:bg-green-900' %>">
                   <i class="fa fa-shield fa-2x <%= analysisData.isPhishing ? 'text-red-500' : 'text-green-500' %>"></i>
                 </div>
                 <div>
                   <h3 class="text-lg font-semibold text-gray-700 dark:text-white">Verdict</h3>
-                  <div class="mt-1 text-2xl font-bold <%= analysisData.isPhishing ? 'text-red-500' : 'text-green-500' %>">
+                  <div class="mt-1 text-2xl font-bold " style="color: <%= analysisData.isPhishing ? 'red' : 'green' %>;">
                     <%= analysisData.verdict %>
                   </div>
                 </div>
               </div>
-              <div class="flex items-center rounded-lg p-6 shadow-lg dark:bg-darkblack-600">
-                <div class="mr-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900">
-                  <i class="fa fa-chart-pie fa-2x text-blue-500"></i>
+              <div class="flex items-center space-x-4 rounded-lg p-6 shadow-lg dark:bg-darkblack-600">
+                <div class="mr-4 flex h-16 w-16 items-center justify-center rounded-full" style="background-color: <%= analysisData.isPhishing ? '#fee2e2' : '#dcfce7' %>;">
+                  <i class="fa fa-chart-pie fa-2x" style="color: <%= analysisData.isPhishing ? '#ef4444' : '#22c55e' %>;"></i>
                 </div>
                 <div>
                   <h3 class="text-lg font-semibold text-gray-700 dark:text-white">Confidence Level</h3>
