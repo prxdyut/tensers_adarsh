@@ -22,7 +22,7 @@ const users = [];
 const incidents = [
   {
     id: 1,
-    date: "2023-06-15",
+    date: "2023-06-15", 
     subject: "PayPal Transaction Confirmation",
     sender: "support@paypal.com",
     verdict: "Legitimate",
@@ -30,7 +30,7 @@ const incidents = [
     email_content: "Dear Customer, your recent transaction of $50.00 has been processed successfully. If you did not authorize this transaction, please contact us immediately.",
     vt_results: {
       IP: "192.168.1.1: Not Malicious",
-      Domain: "paypal.com: Not Malicious",
+      Domain: "paypal.com: Not Malicious", 
       URLs: [
         "https://paypal.com: Not Malicious"
       ]
@@ -86,17 +86,18 @@ const incidents = [
   },
   {
     id: 5,
-    date: "2023-06-11",
-    subject: "GitHub Password Reset",
-    sender: "notifications@github.com",
-    verdict: "Legitimate",
-    email_headers: "From: notifications@github.com\nReply-To: notifications@github.com\nARC-Authentication-Results: i=1; mx.google.com;\n   dkim=pass header.i=@github.com header.s=Outgoing01 header.b=jbnHPD4n;\n   spf=pass (google.com: domain of notifications@github.com designates 121.241.26.42 as permitted sender) smtp.mailfrom=notifications@github.com;\n   dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=github.com",
-    email_content: "Your GitHub password was reset. If you did not perform this action, please secure your account: https://github.com/password_reset.",
+    date: "2023-06-03",
+    subject: "Walmart Gift Card Winner",
+    sender: "bankalerts@kotak.com",
+    verdict: "Phishing",
+    email_headers: "From: bankalerts@kotak.com\nReply-To: bankalerts@kotak.com\nARC-Authentication-Results: i=1; mx.google.com;\n   dkim=pass header.i=@kotak.com header.s=Outgoing01 header.b=jbnHPD4n;\n   spf=pass (google.com: domain of bankalerts@kotak.com designates 121.241.26.42 as permitted sender) smtp.mailfrom=bankalerts@kotak.com;\n   dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=kotak.com",
+    email_content: "Congratulations! You've won a $1000 Walmart gift card. Go to http://bit.ly/fake-link to claim now.\nThis is a limited-time offer, so act fast!",
     vt_results: {
-      IP: "192.168.1.5: Not Malicious",
-      Domain: "github.com: Not Malicious",
+      IP: "192.168.1.1: Not Malicious",
+      Domain: "example.com: Malicious (Detected)",
       URLs: [
-        "https://github.com/password_reset: Not Malicious"
+        "https://malicious-site.com: Malicious (Detected by 5 engines)",
+        "https://safe-site.com: Not Malicious"
       ]
     }
   },
@@ -451,11 +452,49 @@ app.get("/blogs", async (req, res) => {
     }
     
     const blogs = await response.json();
+    console.log(blogs);
     res.render("blogs", { blogs });
   } catch (error) {
     console.error('Error fetching blogs:', error);
     // Provide empty array as fallback if API call fails
-    res.render("blogs", { blogs: [] });
+    
+    res.render("blogs", { blogs: [
+      {
+        "confidence": "0.7",
+        "link": "https://cyberscoop.com/tim-brown-solarwinds-liability-cyberlawcon/",
+        "sentiment": "negative",
+        "summary": "SolarWinds' CISO, Tim Brown, stated that security executives are \"nervous\" about individual liability for data breaches. Brown, who faced legal action after a major hack at SolarWinds, said that holding individuals liable can distract from their core work and create uncertainty. He suggested that CISOs need clarity on how to operate effectively without undue risk of penalties. A survey found that 7 out of 10 CISOs said reports of executives being held liable for breaches has negatively affected their opinion of the job, while nearly half agreed that individual liability would improve accountability.",
+        "title": "SolarWinds CISO says security execs are ‘nervous’ about individual liability for data breaches"
+      },
+      {
+        "confidence": "0.95",
+        "link": "https://cyberscoop.com/army-soldier-alleged-cybercriminal-foreign-spies/",
+        "sentiment": "negative",
+        "summary": "A 21-year-old US Army soldier, Cameron Wagenius, is accused of attempting to sell stolen sensitive information to a foreign intelligence service. Wagenius allegedly tried to extort $500,000 from a major telecommunications company, later identified as AT&T, by threatening to leak phone records of high-ranking public officials. He also searched for ways to defect to Russia and queried \"can hacking be treason.\" Wagenius' actions are believed to be part of a broader effort to extort victims and leak sensitive information, and he has been linked to a previous attack spree targeting organizations that stored data on Snowflake.",
+        "title": "Army soldier linked to Snowflake attack spree allegedly tried to sell data to foreign spies"
+      },
+      {
+        "confidence": "0.8",
+        "link": "https://cyberscoop.com/google-sms-verification-change-passkey-multifactor-authentication/",
+        "sentiment": "neutral",
+        "summary": "Google is phasing out SMS-based verification for its two-step verification process, citing security vulnerabilities such as phishing attacks and dependence on phone carriers' security practices. Instead, the company is introducing a QR code-based system that users will scan with their phone's camera. The change will affect all Google services, including Gmail and YouTube, and is part of a broader industry trend towards more secure verification methods. Google will still use phone number-based verification, but not via SMS, and recommends passkeys as a preferred method. The transition will be gradual, with no specific timeline for completion.",
+        "title": "Here’s what Google is (and isn’t) planning with SMS account verification"
+      },
+      {
+        "confidence": "0.8",
+        "link": "https://cyberscoop.com/cfpb-nominee-jonathan-mckernan-data-brokers/",
+        "sentiment": "neutral",
+        "summary": "Here is a summary of the text in 150 words or less:\n\nJonathan McKernan, nominee for director of the Consumer Financial Protection Bureau (CFPB), expressed openness to continuing the agency's work on data brokers, which was started by his predecessor Rohit Chopra. During a Senate Banking Committee hearing, McKernan stated that Chopra \"was onto something\" with his policies targeting data brokers and data aggregators, citing privacy and national security concerns. McKernan also committed to implementing a policy to protect the security of confidential information obtained by the CFPB and to reviewing the agency's data storage practices. His comments suggest that he may continue some of the CFPB's data-focused work, despite potential pushback from industry groups and",
+        "title": "CFPB nominee signals openness to continuing data-broker work"
+      },
+      {
+        "confidence": "0.8",
+        "link": "https://cyberscoop.com/microsoft-generative-ai-azure-hacking-for-hire-amended-complaint/",
+        "sentiment": "negative",
+        "summary": "Microsoft has identified several individuals from Iran, China, Vietnam, and the UK as key players in a global cybercrime network that sold access to hacked generative AI tools. The network, known as Storm-2139, used stolen Microsoft API keys to sell access to accounts with Azure OpenAI, which were then used to generate harmful content, including images that violate safety guidelines. Microsoft has filed an amended complaint naming four individuals, including Arian Yadegarnia, Ricky Yuen, Phát Phùng Tấn, and Alan Krysiak, as key players in the scheme. The company is preparing criminal referrals to US and foreign law enforcement representatives.",
+        "title": "Microsoft IDs developers behind alleged generative AI hacking-for-hire scheme"
+      }
+    ] });
   }
 });
 
