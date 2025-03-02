@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('partials/meta') %>
+    <title>Tensers - Security Report</title>
+    <%- include('partials/links') %>
+  </head>
+  <body>
+    <!-- layout start -->
+    <div class="layout-wrapper active w-full">
+      <div class="relative flex w-full">
+        <%- include('partials/components/sidebar') %>
+        <div
+          class="body-wrapper flex-1 overflow-x-hidden dark:bg-darkblack-500"
+        >
+          <%- include('partials/components/topbar', {title: 'Security Analysis Report',
+          description: 'Email Phishing Detection Results'}) %>
+          <main class="h-screen w-full px-6 pt-[100px] sm:pt-[156px] xl:px-12">
+            <!-- Main verdict section -->
+            <div class="mb-6 grid grid-cols-2 gap-4">
+              <div class="flex items-center rounded-lg p-6 shadow-lg dark:bg-darkblack-600" id="verdictCard">
+                <div class="mr-4 flex h-16 w-16 items-center justify-center rounded-full <%= analysisData.isPhishing ? 'bg-red-100 dark:bg-red-900' : 'bg-green-100 dark:bg-green-900' %>">
+                  <i class="fa fa-shield fa-2x <%= analysisData.isPhishing ? 'text-red-500' : 'text-green-500' %>"></i>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-700 dark:text-white">Verdict</h3>
+                  <div class="mt-1 text-2xl font-bold <%= analysisData.isPhishing ? 'text-red-500' : 'text-green-500' %>">
+                    <%= analysisData.verdict %>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center rounded-lg p-6 shadow-lg dark:bg-darkblack-600">
+                <div class="mr-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900">
+                  <i class="fa fa-chart-pie fa-2x text-blue-500"></i>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-700 dark:text-white">Confidence Level</h3>
+                  <div class="mt-1 text-2xl font-bold text-blue-500"><%= analysisData.confidence %>%</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Email details section -->
+            <div class="mb-6 grid grid-cols-2 gap-4">
+              <div class="rounded-lg p-6 shadow-lg dark:bg-darkblack-600">
+                <div class="mb-4 flex items-center">
+                  <i class="fa fa-envelope text-xl text-purple-500 mr-2"></i>
+                  <h3 class="text-lg font-semibold text-gray-700 dark:text-white">Email Headers</h3>
+                </div>
+                <div class="text-sm text-gray-500 dark:text-gray-400">Raw email header information</div>
+                <div class="mt-3 text-sm dark:text-white font-mono overflow-x-auto"><%= analysisData.emailData.email_headers %></div>
+              </div>
+              <div class="rounded-lg p-6 shadow-lg dark:bg-darkblack-600">
+                <div class="mb-4 flex items-center">
+                  <i class="fa fa-file-text text-xl text-orange-500 mr-2"></i>
+                  <h3 class="text-lg font-semibold text-gray-700 dark:text-white">Email Content</h3>
+                </div>
+                <div class="text-sm text-gray-500 dark:text-gray-400">Email body content</div>
+                <div class="mt-3 text-sm dark:text-white"><%= analysisData.emailData.email_content %></div>
+              </div>
+            </div>
+
+            <!-- Analysis sections -->
+            <div class="grid grid-cols-2 gap-4">
+              <!-- Header Analysis -->
+              <div class="rounded-lg p-6 shadow-lg dark:bg-darkblack-600">
+                <div class="mb-4 flex items-center">
+                  <i class="fa fa-check-circle text-xl text-green-500 mr-2"></i>
+                  <h3 class="text-lg font-semibold text-gray-700 dark:text-white">Authentication Analysis</h3>
+                </div>
+                <div class="space-y-4">
+                  <div class="rounded-lg bg-darkblack-700 p-4">
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm font-medium dark:text-white">SPF Status</span>
+                      <div class="flex items-center">
+                        <i class="fa fa-circle text-green-500 mr-2"></i>
+                        <span class="text-sm dark:text-white">
+                          <% if (analysisData.parsedReport['HEADER ANALYSIS']) { %>
+                            <%= analysisData.parsedReport['HEADER ANALYSIS'].find(r => r.includes('SPF')) || 'N/A' %>
+                          <% } else { %>
+                            N/A
+                          <% } %>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rounded-lg bg-darkblack-700 p-4">
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm font-medium dark:text-white">DKIM Status</span>
+                      <div class="flex items-center">
+                        <i class="fa fa-circle text-green-500 mr-2"></i>
+                        <span class="text-sm dark:text-white">
+                          <% if (analysisData.parsedReport['HEADER ANALYSIS']) { %>
+                            <%= analysisData.parsedReport['HEADER ANALYSIS'].find(r => r.includes('DKIM')) || 'N/A' %>
+                          <% } else { %>
+                            N/A
+                          <% } %>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rounded-lg bg-darkblack-700 p-4">
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm font-medium dark:text-white">DMARC Status</span>
+                      <div class="flex items-center">
+                        <i class="fa fa-circle text-green-500 mr-2"></i>
+                        <span class="text-sm dark:text-white">
+                          <% if (analysisData.parsedReport['HEADER ANALYSIS']) { %>
+                            <%= analysisData.parsedReport['HEADER ANALYSIS'].find(r => r.includes('DMARC')) || 'N/A' %>
+                          <% } else { %>
+                            N/A
+                          <% } %>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Content Analysis -->
+              <div class="rounded-lg p-6 shadow-lg dark:bg-darkblack-600">
+                <div class="mb-4 flex items-center">
+                  <i class="fa fa-magnifying-glass text-xl text-blue-500 mr-2"></i>
+                  <h3 class="text-lg font-semibold text-gray-700 dark:text-white">Content Analysis</h3>
+                </div>
+                <div class="space-y-4">
+                  <div class="rounded-lg bg-darkblack-700 p-4">
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm font-medium dark:text-white">ML Model Prediction</span>
+                      <div class="text-sm dark:text-white">
+                        <% if (analysisData.parsedReport['CONTENT ANALYSIS']) { %>
+                          <%= analysisData.parsedReport['CONTENT ANALYSIS'].find(r => r.includes('LSTM')) || 'N/A' %>
+                        <% } else { %>
+                          N/A
+                        <% } %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rounded-lg bg-darkblack-700 p-4">
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm font-medium dark:text-white">Urgency Indicators</span>
+                      <div class="text-sm dark:text-white">
+                        <% if (analysisData.parsedReport['CONTENT ANALYSIS']) { %>
+                          <%= analysisData.parsedReport['CONTENT ANALYSIS'].find(r => r.includes('Urgency')) || 'N/A' %>
+                        <% } else { %>
+                          N/A
+                        <% } %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rounded-lg bg-darkblack-700 p-4">
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm font-medium dark:text-white">Suspicious Patterns</span>
+                      <div class="text-sm dark:text-white">
+                        <% if (analysisData.parsedReport['CONTENT ANALYSIS']) { %>
+                          <%= analysisData.parsedReport['CONTENT ANALYSIS'].find(r => r.includes('Suspicious')) || 'N/A' %>
+                        <% } else { %>
+                          N/A
+                        <% } %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- URL Analysis -->
+              <div class="rounded-lg p-6 shadow-lg dark:bg-darkblack-600">
+                <div class="mb-4 flex items-center">
+                  <i class="fa fa-link text-xl text-yellow-500 mr-2"></i>
+                  <h3 class="text-lg font-semibold text-gray-700 dark:text-white">URL Analysis</h3>
+                </div>
+                <div class="space-y-4">
+                  <div class="rounded-lg bg-darkblack-700 p-4">
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm font-medium dark:text-white">Domain Reputation</span>
+                      <div class="text-sm dark:text-white"><%= analysisData.emailData.vt_results.Domain || 'N/A' %></div>
+                    </div>
+                  </div>
+                  <div class="rounded-lg bg-darkblack-700 p-4">
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm font-medium dark:text-white">URL Count</span>
+                      <div class="text-sm dark:text-white">
+                        <% if (analysisData.parsedReport['LINK ANALYSIS'] && analysisData.parsedReport['LINK ANALYSIS'][0]) { %>
+                          <%= analysisData.parsedReport['LINK ANALYSIS'][0] %>
+                        <% } else { %>
+                          No URLs found
+                        <% } %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rounded-lg bg-darkblack-700 p-4">
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm font-medium dark:text-white">Malicious Links</span>
+                      <div class="text-sm dark:text-white">None detected</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Threat Analysis -->
+              <div class="rounded-lg p-6 shadow-lg dark:bg-darkblack-600">
+                <div class="mb-4 flex items-center">
+                  <i class="fa fa-shield-halved text-xl text-red-500 mr-2"></i>
+                  <h3 class="text-lg font-semibold text-gray-700 dark:text-white">Threat Analysis</h3>
+                </div>
+                <div class="space-y-4">
+                  <div class="rounded-lg bg-darkblack-700 p-4">
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm font-medium dark:text-white">IP Reputation</span>
+                      <div class="text-sm dark:text-white"><%= analysisData.emailData.vt_results.IP || 'N/A' %></div>
+                    </div>
+                  </div>
+                  <div class="rounded-lg bg-darkblack-700 p-4">
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm font-medium dark:text-white">Threat Level</span>
+                      <div class="text-sm dark:text-white"><%= analysisData.verdict %></div>
+                    </div>
+                  </div>
+                  <div class="rounded-lg bg-darkblack-700 p-4">
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm font-medium dark:text-white">Security Recommendations</span>
+                      <div class="text-sm dark:text-white">Monitor domain reputation</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Detailed Report Section -->
+            <div class="mt-6">
+              <div class="rounded-lg p-6 shadow-lg dark:bg-darkblack-600">
+                <div class="mb-4 flex items-center">
+                  <i class="fa fa-file-lines text-xl text-purple-500 mr-2"></i>
+                  <h3 class="text-lg font-semibold text-gray-700 dark:text-white">Detailed Analysis Report</h3>
+                </div>
+                <div class="text-sm text-gray-500 dark:text-gray-400 mb-4">Comprehensive security analysis findings</div>
+                <div class="text-sm dark:text-white prose dark:prose-invert max-w-none">
+                  <% if (analysisData.enhanced_report) { %>
+                    <% analysisData.enhanced_report.split('\n').forEach(line => { %>
+                      <% if (line.match(/^\d+\./)) { %>
+                        <h3 class="text-lg font-semibold mb-2 mt-4"><%= line %></h3>
+                      <% } else if (line.startsWith('-')) { %>
+                        <p class="ml-4 mb-2">• <%= line.substring(2) %></p>
+                      <% } else { %>
+                        <p class="mb-2"><%= line %></p>
+                      <% } %>
+                    <% }); %>
+                  <% } else { %>
+                    No detailed report available.
+                  <% } %>
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <!-- layout end -->
+    <%- include('partials/scripts') %>
+  </body>
+</html>
