@@ -1,6 +1,15 @@
+# dependencies
+/node_modules
+# misc
 .DS_Store
-/node_modules/
+.idea
+*.pem
 
-# React Router
-/.react-router/
-/build/
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# vercel
+.vercel

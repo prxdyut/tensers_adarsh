@@ -1,0 +1,259 @@
+<aside
+          class="sidebar-wrapper fixed top-0 z-30 block h-full w-[308px] bg-white dark:bg-darkblack-600 sm:hidden xl:block"
+        >
+          <div
+            class="sidebar-header relative z-30 flex h-[108px] w-full items-center border-b border-r border-b-[#F7F7F7] border-r-[#F7F7F7] pl-[50px] dark:border-darkblack-400"
+          >
+            <a href="/dashboard">
+              <img
+                src="./assets/images/logo/logo-color.svg"
+                class="block dark:hidden"
+                alt="logo"
+              />
+              <img
+                src="./assets/images/logo/logo-white.svg"
+                class="hidden dark:block"
+                alt="logo"
+              />
+            </a>
+            <button
+              type="button"
+              class="drawer-btn absolute right-0 top-auto"
+              title="Ctrl+b"
+            >
+              <span>
+                <svg
+                  width="16"
+                  height="40"
+                  viewBox="0 0 16 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M0 10C0 4.47715 4.47715 0 10 0H16V40H10C4.47715 40 0 35.5228 0 30V10Z"
+                    fill="#22C55E"
+                  />
+                  <path
+                    d="M10 15L6 20.0049L10 25.0098"
+                    stroke="#ffffff"
+                    stroke-width="1.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+            </button>
+          </div>
+          <div
+            class="sidebar-body overflow-style-none relative z-30 h-screen w-full overflow-y-scroll pb-[200px] pl-[48px] pt-[14px]"
+          >
+            <div class="nav-wrapper mb-[36px] pr-[50px]">
+              <div class="item-wrapper mb-5">
+                <h4
+                  class="border-b border-bgray-200 text-sm font-medium leading-7 text-bgray-700 dark:border-darkblack-400 dark:text-bgray-50"
+                >
+                  Menu
+                </h4>
+                <ul class="mt-2.5">
+                  <li class="item py-[11px] text-bgray-900 dark:text-white">
+                    <a href="/dashboard">
+                      <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2.5">
+                          <span class="item-ico">
+                            <svg
+                              width="18"
+                              height="21"
+                              viewBox="0 0 18 21"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                class="path-1"
+                                d="M0 8.84719C0 7.99027 0.366443 7.17426 1.00691 6.60496L6.34255 1.86217C7.85809 0.515019 10.1419 0.515019 11.6575 1.86217L16.9931 6.60496C17.6336 7.17426 18 7.99027 18 8.84719V17C18 19.2091 16.2091 21 14 21H4C1.79086 21 0 19.2091 0 17V8.84719Z"
+                                fill="#1A202C"
+                              />
+                              <path
+                                class="path-2"
+                                d="M5 17C5 14.7909 6.79086 13 9 13C11.2091 13 13 14.7909 13 17V21H5V17Z"
+                                fill="#22C55E"
+                              />
+                            </svg>
+                          </span>
+                          <span
+                            class="item-text text-lg font-medium leading-none"
+                            >Dashboards</span
+                          >
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="item py-[11px] text-bgray-900 dark:text-white">
+                    <a href="/blogs">
+                      <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2.5">
+                          <span class="item-ico">
+                            <svg
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M1.57666 3.61499C1.57666 2.51042 2.47209 1.61499 3.57666 1.61499H8.5C9.60456 1.61499 10.5 2.51042 10.5 3.61499V8.53833C10.5 9.64289 9.60456 10.5383 8.49999 10.5383H3.57666C2.47209 10.5383 1.57666 9.64289 1.57666 8.53832V3.61499Z"
+                                fill="#1A202C"
+                                class="path-1"
+                              />
+                              <path
+                                d="M13.5 15.5383C13.5 14.4338 14.3954 13.5383 15.5 13.5383H20.4233C21.5279 13.5383 22.4233 14.4338 22.4233 15.5383V20.4617C22.4233 21.5662 21.5279 22.4617 20.4233 22.4617H15.5C14.3954 22.4617 13.5 21.5662 13.5 20.4617V15.5383Z"
+                                fill="#1A202C"
+                                class="path-1"
+                              />
+                              <circle
+                                cx="6.03832"
+                                cy="18"
+                                r="4.46166"
+                                fill="#1A202C"
+                                class="path-1"
+                              />
+                              <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M18 2C18.4142 2 18.75 2.33579 18.75 2.75V5.25H21.25C21.6642 5.25 22 5.58579 22 6C22 6.41421 21.6642 6.75 21.25 6.75H18.75V9.25C18.75 9.66421 18.4142 10 18 10C17.5858 10 17.25 9.66421 17.25 9.25V6.75H14.75C14.3358 6.75 14 6.41421 14 6C14 5.58579 14.3358 5.25 14.75 5.25H17.25V2.75C17.25 2.33579 17.5858 2 18 2Z"
+                                fill="#22C55E"
+                                class="path-2"
+                              />
+                            </svg>
+                          </span>
+                          <span
+                            class="item-text text-lg font-medium leading-none"
+                            >Blogs</span
+                          >
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="item py-[11px] text-bgray-900 dark:text-white">
+                    <a href="/incidents">
+                      <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2.5">
+                          <span class="item-ico">
+                            <svg
+                              width="18"
+                              height="20"
+                              viewBox="0 0 18 20"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M18 16V6C18 3.79086 16.2091 2 14 2H4C1.79086 2 0 3.79086 0 6V16C0 18.2091 1.79086 20 4 20H14C16.2091 20 18 18.2091 18 16Z"
+                                fill="#1A202C"
+                                class="path-1"
+                              />
+                              <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M4.25 8C4.25 7.58579 4.58579 7.25 5 7.25H13C13.4142 7.25 13.75 7.58579 13.75 8C13.75 8.41421 13.4142 8.75 13 8.75H5C4.58579 8.75 4.25 8.41421 4.25 8Z"
+                                fill="#22C55E"
+                                class="path-2"
+                              />
+                              <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M4.25 12C4.25 11.5858 4.58579 11.25 5 11.25H13C13.4142 11.25 13.75 11.5858 13.75 12C13.75 12.4142 13.4142 12.75 13 12.75H5C4.58579 12.75 4.25 12.4142 4.25 12Z"
+                                fill="#22C55E"
+                                class="path-2"
+                              />
+                              <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M4.25 16C4.25 15.5858 4.58579 15.25 5 15.25H9C9.41421 15.25 9.75 15.5858 9.75 16C9.75 16.4142 9.41421 16.75 9 16.75H5C4.58579 16.75 4.25 16.4142 4.25 16Z"
+                                fill="#22C55E"
+                                class="path-2"
+                              />
+                              <path
+                                d="M11 0H7C5.89543 0 5 0.895431 5 2C5 3.10457 5.89543 4 7 4H11C12.1046 4 13 3.10457 13 2C13 0.895431 12.1046 0 11 0Z"
+                                fill="#22C55E"
+                                class="path-2"
+                              />
+                            </svg>
+                          </span>
+                          <span
+                            class="item-text text-lg font-medium leading-none"
+                            >Incidents</span
+                          >
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  
+                  <li class="item py-[11px] text-bgray-900 dark:text-white">
+                    <a href="/chatbot">
+                      <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2.5">
+                          <span class="item-ico">
+                            <svg
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M11.8889 22C13.4278 22 14.737 21.0724 15.2222 19.7778H8.55554C9.04075 21.0724 10.35 22 11.8889 22Z"
+                                fill="#22C55E"
+                                class="path-2"
+                              />
+                              <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M13.7662 2.83781C13.3045 2.32351 12.6345 2 11.8889 2C10.4959 2 9.36673 3.12921 9.36673 4.52216V4.6374C6.98629 5.45244 5.224 7.38959 4.95607 9.75021L4.4592 14.1281C4.36971 14.9165 4.03716 15.6684 3.49754 16.3024C2.27862 17.7343 3.43826 19.7778 5.46979 19.7778H18.308C20.3395 19.7778 21.4992 17.7343 20.2802 16.3024C19.7406 15.6684 19.4081 14.9165 19.3186 14.1281L18.8217 9.75021C18.8148 9.68916 18.8068 9.6284 18.7979 9.56793C18.3712 9.70421 17.9164 9.77778 17.4444 9.77778C14.9898 9.77778 13 7.78793 13 5.33333C13 4.40827 13.2826 3.54922 13.7662 2.83781Z"
+                                fill="#1A202C"
+                                class="path-1"
+                              />
+                              <circle
+                                cx="17.4444"
+                                cy="5.33333"
+                                r="3.33333"
+                                fill="#22C55E"
+                                class="path-2"
+                              />
+                            </svg>
+                          </span>
+                          <span
+                            class="item-text text-lg font-medium leading-none"
+                            >Chatbot</span
+                          >
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </aside>
+        <div
+          style="z-index: 25"
+          class="aside-overlay fixed left-0 top-0 block h-full w-full bg-black bg-opacity-30 sm:hidden"
+        ></div>
+        <aside class="relative hidden w-[96px] bg-white dark:bg-black sm:block">
+          <div class="sidebar-wrapper-collapse relative top-0 z-30 w-full">
+            <div
+              class="sidebar-header sticky top-0 z-20 flex h-[108px] w-full items-center justify-center border-b border-r border-b-[#F7F7F7] border-r-[#F7F7F7] bg-white dark:border-darkblack-500 dark:bg-darkblack-600"
+            >
+              <a href="index.html">
+                <img
+                  src="./assets/images/logo/logo-short.svg"
+                  class="block dark:hidden"
+                  alt="logo"
+                />
+                <img
+                  src="./assets/images/logo/logo-short-white.svg"
+                  class="hidden dark:block"
+                  alt="logo"
+                />
+              </a>
+            </div>
+          </div>
+        </aside>
